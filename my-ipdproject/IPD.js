@@ -61,13 +61,30 @@ async function handleClick(event) {
     return;
   }
     // calculate ipd
+
+
+const leftEyeLandmarks= []
+const rightEyeLandmarks = []
+
+for (const connection of FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE ){
   
-const leftEyeLandmarks = faceLandmarkerResult.faceLandmarks[0][FaceLandmarker.FACE_LANDMARKS_LEFT_EYE];
-const rightEyeLandmarks = faceLandmarkerResult.faceLandmarks[0][FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE];
+  rightEyeLandmarks.push(faceLandmarkerResult.faceLandmarks[0][connection["start"]])
+  rightEyeLandmarks.push(faceLandmarkerResult.faceLandmarks[0][connection["end"]])
+}
+
+for (const connection of FaceLandmarker.FACE_LANDMARKS_LEFT_EYE ){
+  
+  leftEyeLandmarks.push(faceLandmarkerResult.faceLandmarks[0][connection["start"]])
+  leftEyeLandmarks.push(faceLandmarkerResult.faceLandmarks[0][connection["end"]])
+}
+
+// const leftEyeLandmarks = faceLandmarkerResult.faceLandmarks[0][FaceLandmarker.FACE_LANDMARKS_LEFT_EYE];
+// const rightEyeLandmarks = faceLandmarkerResult.faceLandmarks[0][FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE];
+console.log(faceLandmarkerResult.faceLandmarks)
 
 const leftEyeCenter = calculateLandmarkCenter(leftEyeLandmarks);
 const rightEyeCenter = calculateLandmarkCenter(rightEyeLandmarks);
-
+console.log(FaceLandmarker.FACE_LANDMARKS_LEFT_EYE)
 const ipd = calculateIPD(leftEyeCenter, rightEyeCenter);
 console.log("Inter-Pupillary Distance (IPD):", ipd);
 // Display IPD on the screen
