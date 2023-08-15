@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Face Detection and IPD Measurement</title>
+</head>
+<body>
+  <h1>Face Detection and IPD Measurement</h1>
+   <h2>Demo: Detecting Images</h2>
+    <p><b>Click on the canvas below</b> to see the key landmarks of the face.</p>
+ <p><input type="file" id="upload-image-input" accept="image/*">
+  <button id="preview-button">Preview</button> 
+    <button id="remove-button">Remove</button></p>
+    <div class="detectOnClick">
+  <canvas id="uploaded-canvas"></canvas>
+  <img id="uploaded-image" style="display: none;">
+  <!-- <canvas id="uploaded-canvas" width="100%" height="auto" crossorigin="anonymous" title="Click to get detection!"></canvas> -->
+  <div class="blend-shapes">
+    <ul class="blend-shapes-list" id="image-blend-shapes"></ul>
+    
+ </div>
+   <section id="demos" class="invisible">   
+  </section> 
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Face Landmarker</title>
+  <p id="ipd-result" class="invisible">Inter-Pupillary Distance (IPD):</p>
+<button id="toggle-ipd-button">Toggle IPD Visibility</button>
+
+  <style>
+  
+    body {
+      font-family: helvetica, arial, sans-serif;
+      margin: 2;
+      color: #3d3d3d;
+      --mdc-theme-primary: #007f8b;
+      --mdc-theme-on-primary: #f1f3f4;
+    }
+    
+    h1 {
+      font-style: italic;
+      color: #ff6f00;
+      color: #007f8b;
+    }
+    
+    h2 {
+      clear: both;
+    }
+    
+    em {
+      font-weight: bold;
+    }
+    
+    video {
+      clear: both;
+      display: block;
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+    }
+    
+    section {
+      opacity: 1;
+      transition: opacity 500ms ease-in-out;
+    }
+    
+    header,
+    footer {
+      clear: both;
+    }
+    
+    .removed {
+      display: none;
+    }
+    
+    .invisible {
+      opacity: 0.2;
+    }
+    
+    .note {
+      font-style: italic;
+      font-size: 130%;
+    }
+    
+    .videoView,
+    .detectOnClick,
+    .blend-shapes {
+      position: relative;
+      float: left;
+      width: 48%;
+      margin: 2% 1%;
+      cursor: pointer;
+    }
+    
+    .videoView p,
+    .detectOnClick p {
+      position: absolute;
+      padding: 5px;
+      background-color: #007f8b;
+      color: #fff;
+      border: 1px dashed rgba(255, 255, 255, 0.7);
+      z-index: 2;
+      font-size: 12px;
+      margin: 0;
+    }
+    
+    .highlighter {
+      background: rgba(0, 255, 0, 0.25);
+      border: 1px dashed #fff;
+      z-index: 1;
+      position: absolute;
+    }
+    
+    .canvas {
+      z-index: 1;
+      position: absolute;
+      pointer-events: none;
+    }
+    
+    .output_canvas {
+      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+    }
+    
+    .detectOnClick {
+      z-index: 0;
+    }
+    
+    .detectOnClick img {
+      width: 100%;
+    }
+    
+    .blend-shapes-item {
+      display: flex;
+      align-items: center;
+      height: 20px;
+    }
+    
+    .blend-shapes-label {
+      display: flex;
+      width: 120px;
+      justify-content: flex-end;
+      align-items: center;
+      margin-right: 4px;
+    }
+    
+    .blend-shapes-value {
+      display: flex;
+      height: 16px;
+      align-items: center;
+      background-color: #007f8b;
+    }
+    /* Add this CSS to position the IPD result to the right of the image */
+#image-container {
+  position: relative;
+  display: inline-block;
+}
+
+#ipd-result {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 10px;
+}
+/* Add this CSS rule to make the IPD result visible */
+.invisible {
+  display: none;
+}
+
+
+    </style>
+
+
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+</head>
+   
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.6.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/blazeface"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+  <script type="module" src="IPD.js"></script>
+  <!-- <script src="buttons.js"></script> -->
+</body>
+</html>
